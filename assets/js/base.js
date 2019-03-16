@@ -3,8 +3,9 @@ function BaseController() {
 
     self.queue = new AjaxQueue()
 
-    #self.host = "http://localhost:3000"
+    //self.host = "http://localhost:3000"
     self.host = "https://everlywellproject-api.herokuapp.com"
+
     self.helpers = {}
     self.helpers.url = function(uri) {
         return self.host + uri;
