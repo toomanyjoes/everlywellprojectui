@@ -1,0 +1,138 @@
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+#navbar-env  {
+    color: #ccc;
+    font-size: 10px;
+    writing-mode: tb-rl;
+}
+
+#navbar-brand img {
+    max-height: 32px;
+}
+
+.form-enchanced {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-enchanced .form-enchanced-heading,
+.form-enchanced .checkbox {
+    margin-bottom: 10px;
+}
+.form-enchanced .checkbox {
+    font-weight: 400;
+}
+.form-enchanced .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-enchanced .form-control:focus {
+    z-index: 2;
+}
+.form-enchanced input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-enchanced input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.center {
+    display: table;
+    margin: auto;
+}
+
+.link {cursor: pointer;}
+
+.modal-content.transparent {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+@keyframes pulse {
+  0%   { background-color: #e7e8ea; }
+  100% { background-color: #ffffff; }
+}
+.btn-sq-lg {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.btn-sq {
+  width: 100px !important;
+  height: 100px !important;
+  font-size: 10px;
+}
+
+.btn-sq-sm {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 10px;
+}
+
+.btn-sq-xs {
+  width: 25px !important;
+  height: 25px !important;
+  padding:2px;
+}
+
+.btn{ margin-top: 10px}
+.btn-default.btn-on.active{background-color: #5BB75B;color: white;}
+.btn-default.btn-off.active{background-color: #DA4F49;color: white;}
+
+.progress-white { background-color: #fff }
+
+.form-control[type=color] {
+    height: auto;
+}
+
+/* Need styles for -webkit- and -moz- */
+
+.form-control[type=color]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-moz-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-ms-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+.form-control[type=color][list="colors"]::-webkit-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+.form-control[type=color][list="colors"]:-moz-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+.form-control[type=color][list="colors"]:-ms-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+
+.form-control[type=color]::-webkit-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]::-moz-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-ms-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}

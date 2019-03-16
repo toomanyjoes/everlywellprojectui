@@ -1,0 +1,16 @@
+{
+  "name": "everlywellprojectui",
+  "version": "1.0.0",
+  "description": "recruiting project",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "test": "rar"
+  },
+  "author": "Joe Elizondo",
+  "license": "ISC",
+  "engines": {
+    "node": "11.11.0",
+    "npm": "6.7.0"
+  }
+}

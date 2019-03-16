@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <title>Expert Search</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+        <div class="container" id="navbar">
+          <span id="navbar-brand" class="link navbar-brand lead">
+              Expert Search
+          </span>
+          <button class="navbar-toggler nav-actions d-none" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a id="nav-home" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a id="nav-friend" class="nav-link" href="#">Manage Friendships <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a id="nav-create" class="nav-link" href="#">Create User<span class="sr-only">(current)</span></a>
+              </li>
+          </div>
+  
+        </div>
+      </nav>
+
+      <main role="main" class="container">
+        <div id="directory">
+          <div id="card-header" class="card-header bg-primary mt-4 pt-4" align="center"><h1 class="display-4" style="color:white;">Expert Directory</h1></div>
+          <div id="directory-contents"></div>
+        </div><!-- #directory -->
+        <div id="expert-profile"></div>
+        <div id="manage-friendships"></div>
+        <div id="create-user"></div>
+      </main>
+
+    <div id="modal-placeholder"></div>
+    </div> <!-- /container -->
+
+    <script type="text/html" id="template-manage-friendships">
+       <div class="container-fluid bg-light">
+        <div class="jumbotron">
+          <h1 class="display-4 ptb-4">Manage Friendships</h3>
+            <div class="table-danger p-4" id="manage-friendship-error-box" style="display: none"></div>
+            <div class="table-success p-4" id="manage-friendship-success-box" style="display: none"></div>
+        </div>
+        <form id="form-manage-friendships" class="select-friend form-enchanced" method="post" name="manage-friendships" action="/users/">
+            <div class="row">
+                <select id="friend-dropdown" name="friend1" class="custom-select custom-select-lg dropdown">
+                  <% _.each(users, function(value, key) { %>
+                    <option <%= key == self.friend1 ? 'selected="selected"' : ""%> value="<%= key %>"><%= value.first_name %> <%= value.last_name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="row">
+                <select id="friend-dropdown" name="friend2" class="custom-select custom-select-lg dropdown">
+                  <% _.each(users, function(value, key) { %>
+                  <option <%= key == self.friend2 ? 'selected="selected"' : ""%> value="<%= key %>"><%= value.first_name %> <%= value.last_name %></option>
+              <% }) %>
+            </select>
+            </div>
+            <button class="btn-lg btn-outline-secondary" type="submit">Create</button>
+        </form>
+      </div>
+    </script>
+
+
+    <script type="text/html" id="template-create-user">
+       <div class="container-fluid bg-light">
+        <div class="jumbotron">
+          <h1 class="display-4 ptb-4">Create User</h3>
+            <div class="table-danger p-4" id="create-user-error-box" style="display: none"></div>
+            <div class="table-success p-4" id="create-user-success-box" style="display: none"></div>
+        </div>
+        <form id="form-create-user" class="select-friend form-enchanced" method="post" name="create-user" action="/users">
+            <div class="row"> 
+              <input type="text" class="form-control" name="first-name" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon2">
+            </div>
+            <div class="row"> 
+              <input type="text" class="form-control" name="last-name" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon2">
+            </div>
+            <div class="row"> 
+              <input type="text" class="form-control" name="website" placeholder="Website Address" aria-label="Website" aria-describedby="basic-addon2">
+            </div>
+            <button class="btn-lg btn-outline-secondary" type="submit">Create</button>
+        </form>
+      </div>
+    </script>
+
+    <script type="text/html" id="template-directory-contents">
+          <div class="container-fluid bg-light">
+            <div class="row">
+            <div class="col-4">
+          <div id='directory-list' class='list-group' style="height: 600px; overflow-y: scroll;">
+          <% _.each(users, function(value, key) { %>
+            <a class="list-group-item list-group-item-action" href="#list-item-<%= key %>">
+              <h2 class="lead"><%= value.first_name %> <%= value.last_name %></h2>
+            </a>
+          <% }) %>
+        </div> 
+      </div>
+      <div class="col-8" style="height: 600px; overflow-y: scroll;">
+          <div data-spy="scroll" data-target="#directory-list" data-offset="0" class="scrollspy-example">
+            <% _.each(users, function(value, key) { %>
+            <div class="row border border-top border-bottom border-light">
+            <div class="col">
+            <h3 id="list-item-<%= key %>"><a class="link visit-user-profile" href="/users/<%= key %>" data-key="<%= key %>"><%= value.last_name %>, <%= value.first_name %></a></h3>
+            <h4 class="lead" id="list-item-<%= key %>"><%= value.website %></h4>
+            </div>
+            <div class="col">
+            <h5 class="lead"> Knowledgable in topics: </h5>
+            <p><ul><% _.each(user_data[key], function(value, k) { %>
+              <li><%= value.data %></li>
+              <% }) %>
+            </ul>
+            </p>
+          </div>
+          </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </script>
+
+    <script type="text/html" id="template-user-profile">
+      <div class="container-fluid bg-light">
+        <div class="jumbotron">
+          <h1 class="display-4 ptb-4"><%= profile.first_name %> <%= profile.last_name %></h1><h3> <p>(<%= profile.website %>)</p></h3>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+          <form id="form-expert-search" method="GET" action="/users/<%= profile.user_id %>/expert_search" name="expert-search">
+            <div class="form-group">
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" name="search-terms" placeholder="Search terms" aria-label="Search terms" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn-lg btn-outline-secondary" type="submit">Search</button>
+            </div>
+          </div>
+          </div>
+          </form>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="ml-4 col-5">
+            <div class="row">
+              <h1>Friends</h1>
+            </div>
+            <div class="row">
+              <div class='list-group' style="width:70%"><% _.each(friends, function(friend, k) { %>
+              <a class="visit-friend-profile lead list-group-item list-group-item-action" href="/users/<%= friend.friend_id %>" data-key="<%= friend.friend_id %>">
+                <%= users[friend.friend_id].first_name %> <%= users[friend.friend_id].last_name %>
+              </a>
+              <% }) %>
+            </div>
+            </div>
+          </div>
+           <div class="col-5 mr-4">
+            <div class="row">
+          <h1>Headings</h1>
+        </div>
+          <div class="row">
+            <ul class='list-group' style="width:70%"><% _.each(user_data[profile.user_id], function(value, k) { %>
+              <li class="lead list-group-item"><%= value.data %></li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </script>
+
+
+    <!-- Modal -->
+    <script type="text/html" id="template-expert-search-modal">
+      <% console.log(attrs) %>
+      <div class="modal fade" id="search-results-modal" tabindex="-1" role="dialog">
+        <form id="form-expert-search-results" method="post" action="/users/<%= attrs.user_id %>/friends" data-friend="<%= attrs.friend_id %>" data-user="<%= attrs.user_id %>">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Search Result<span></span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                  <h4><%= attrs.result %></h4>
+                  <h6>Terms: [<%= attrs.terms %>]</h6>
+                  <% if (attrs.result != "No search result found for given terms") { %>
+                  <h5>Would you like to establish a new friendship?</h5>
+                  <div class="mb-4"></div><div class="mb-4"></div>
+                  <div style ="position: absolute; bottom: 0;right:0;">                    
+                    <button id="form-expert-search-results" type="submit" data-dismiss="modal" class="btn btn-danger" aria-label="Add Friend" data-action="/users/<%= attrs.user_id %>/friends" data-friend="<%= attrs.friend_id %>" data-user="<%= attrs.user_id %>" data-key="<%= attrs.user_id %>">Add Friend</button>
+                  </div>
+                </div>
+                <% } %>
+            </div>
+          </div>
+        </div>
+       </form>
+      </div>
+    </script>
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="assets/js/third-party/underscore-min.js"></script>
+    <script src="assets/js/ajax_queue.js"></script>
+    <script src="assets/js/base.js"></script>
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
