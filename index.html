@@ -142,7 +142,7 @@
     <script type="text/html" id="template-user-profile">
       <div class="container-fluid bg-light">
         <div class="jumbotron">
-          <h1 class="display-4 ptb-4"><%= profile.first_name %> <%= profile.last_name %></h1><h3> <p>(<%= profile.website %>)</p></h3>
+          <h1 class="display-4 ptb-4"><%= profile.first_name %> <%= profile.last_name %></h1><h3> <p>(<a href="<%= profile.website %>"><%= profile.website %></a>)</p></h3>
         </div>
 
         <div class="row">
