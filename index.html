@@ -120,7 +120,7 @@
             <div class="row border border-top border-bottom border-light">
             <div class="col">
             <h3 id="list-item-<%= key %>"><a class="link visit-user-profile" href="/users/<%= key %>" data-key="<%= key %>"><%= value.last_name %>, <%= value.first_name %></a></h3>
-            <h4 class="lead" id="list-item-<%= key %>"><%= value.website %></h4>
+            <h5 class="lead" id="list-item-<%= key %>"><a href="<%= value.website %>"><%= value.website %></a></h5>
             </div>
             <div class="col">
             <h5 class="lead"> Knowledgable in topics: </h5>
