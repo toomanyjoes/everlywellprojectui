@@ -256,7 +256,7 @@ function ExpertSearchController() {
                 console.log(xhr)
                 data = xhr.responseText
                 d = JSON.parse(data)
-                $('#create-user-error-box').html("Failed to create friendship: " + d['errors'][0]['detail']).show()
+                $('#create-user-error-box').html("Failed to create user: " + d['errors'][0]['detail']).show()
                 setTimeout(() => {$('#create-user-error-box').hide()}, 5000);
             }
         });
